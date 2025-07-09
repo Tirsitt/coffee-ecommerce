@@ -113,3 +113,74 @@ button:focus-visible {
     justify-content: center;
   }
 }
+
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-img-top {
+  background-color: #f8f9fa;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .btn {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
+
+footer a {
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--bs-primary) !important;
+}
+
+.social-icons a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .footer-col {
+    margin-bottom: 2rem;
+  }
+}
+
+.footer-contact-wrapper {
+  margin-left: auto;
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* src/components/SearchBar.css */
+.search-bar {
+  position: relative;
+}
+.search-bar .btn-link {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+/* In your Shop.css */
+.pagination-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}

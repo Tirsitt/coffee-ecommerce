@@ -1,5 +1,4 @@
-// src/pages/ProductDetail.tsx
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { mockProducts } from "../data/mockProducts";
 import { useCart } from "../context/CartContext";
 
@@ -9,14 +8,7 @@ export default function ProductDetail() {
   const product = mockProducts.find(p => p.id === Number(id));
 
   if (!product) {
-    return (
-      <div className="container mt-5 text-center">
-        <div className="alert alert-warning">Product not found</div>
-        <Link to="/" className="btn btn-primary mt-3">
-          Back to Shop
-        </Link>
-      </div>
-    );
+    return <Navigate to="/404" replace />;
   }
 
   return (

@@ -1,12 +1,13 @@
 import type { Product } from "../types/Product";
 import ProductCard from "./ProductCard";
 import EmptyState from "./EmptyState";
+
 type Props = {
   products: Product[];
   loading?: boolean;
 };
 
-export default function ProductGrid({ products, loading }: Props) {
+export default function ProductGrid({ products, loading = false }: Props) {
   if (loading) {
     return (
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -27,11 +28,13 @@ export default function ProductGrid({ products, loading }: Props) {
   }
 
   if (products.length === 0) {
-    return <EmptyState 
-      title="No products found"
-      description="Try adjusting your filters"
-      icon="bi-emoji-frown"
-    />;
+    return (
+      <EmptyState 
+        title="No products found"
+        description="Try adjusting your filters"
+        icon="bi-emoji-frown"
+      />
+    );
   }
 
   return (

@@ -1,4 +1,4 @@
-import CheckoutSidebar from "../components/CheckoutSidebar";
+import CheckoutSidebar from "../components/CheckoutSidebar/CheckoutSidebar";
 import CartItemList from "../components/CartItemList";
 
 export default function Checkout() {

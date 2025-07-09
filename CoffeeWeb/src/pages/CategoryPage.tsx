@@ -4,7 +4,6 @@ import ProductFilters from "../components/ProductFilters";
 import ProductGrid from "../components/ProductGrid";
 import Breadcrumbs from "../components/Breadcrumbs";
 import { mockProducts } from "../data/mockProducts";
-import EmptyState from "../components/EmptyState";
 import type { Product } from "../types/Product";
 
 export default function CategoryPage() {
@@ -25,21 +24,13 @@ export default function CategoryPage() {
     return () => clearTimeout(timer);
   }, [category]);
 
-  if (!category) {
-    return <EmptyState 
-      title="Category not specified" 
-      description="Please select a valid category"
-      icon="bi-exclamation-circle"
-    />;
-  }
-
   return (
     <div className="container mt-3">
       {/* Breadcrumbs */}
       <Breadcrumbs
         paths={[
           { name: "Home", link: "/" },
-          { name: category.charAt(0).toUpperCase() + category.slice(1) },
+          { name: category ? category.charAt(0).toUpperCase() + category.slice(1) : "Category" },
         ]}
       />
 

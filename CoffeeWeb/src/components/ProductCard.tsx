@@ -1,4 +1,3 @@
-// src/components/ProductCard.tsx
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import type { Product } from "../types/Product";
@@ -9,7 +8,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const finalPrice = getFinalPrice(product);
 
   return (
-    <div className="card h-100 product-card">
+    <div className="card h-100 shadow-sm product-card">
       {/* Sale Badge */}
       {product.discountPercentage && (
         <div className="badge bg-danger position-absolute top-0 end-0 m-2">
@@ -24,6 +23,9 @@ export default function ProductCard({ product }: { product: Product }) {
           className="card-img-top p-3"
           alt={product.name}
           style={{ height: "200px", objectFit: "contain" }}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = '/placeholder-product.png';
+          }}
         />
       </Link>
 
@@ -37,7 +39,10 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Product Name */}
         <h5 className="card-title">
-          <Link to={`/product/${product.id}`} className="text-decoration-none text-dark">
+          <Link 
+            to={`/product/${product.id}`} 
+            className="text-decoration-none text-dark"
+          >
             {product.name}
           </Link>
         </h5>
@@ -49,7 +54,7 @@ export default function ProductCard({ product }: { product: Product }) {
               <i
                 key={i}
                 className={`bi ${
-                  i < Math.floor(product.rating!)
+                  i < Math.floor(product.rating ?? 0)
                     ? "bi-star-fill text-warning"
                     : "bi-star"
                 } me-1 small`}
