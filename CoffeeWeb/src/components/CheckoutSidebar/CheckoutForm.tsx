@@ -3,9 +3,10 @@ import { useCart } from "../../context/CartContext";
 
 export default function CheckoutForm() {
   const { cart, clearCart } = useCart();
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: ""
+  });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -13,14 +14,26 @@ export default function CheckoutForm() {
     setStatus("sending");
 
     try {
-      const response = await fetch("/api/send-order", {
+      // Prepare the order data
+      const orderData = {
+        customerInfo: {
+          name: formData.name,
+          email: formData.email
+        },
+        orderItems: cart.map(item => ({
+          productId: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity
+        })),
+        orderTotal: cart.reduce((total, item) => total + (item.price * item.quantity), 0),
+        orderDate: new Date().toISOString()
+      };
+
+      const response = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          cart,
-        }),
+        body: JSON.stringify(orderData),
       });
 
       if (!response.ok) throw new Error("Failed to send order");
@@ -28,23 +41,29 @@ export default function CheckoutForm() {
       setStatus("success");
       clearCart();
     } catch (err) {
+      console.error("Order submission error:", err);
       setStatus("error");
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
   return (
     <div className="mt-3 p-3 border rounded bg-white">
-      <h6 className="mb-3">Send Your Order</h6>
+      <h6 className="mb-3">Complete Your Order</h6>
 
       {status === "success" && (
         <div className="alert alert-success">
-          ✅ Your order was sent successfully!
+          ✅ Your order was placed successfully! We'll contact you shortly.
         </div>
       )}
 
       {status === "error" && (
         <div className="alert alert-danger">
-          ❌ Something went wrong. Please try again.
+          ❌ Failed to place order. Please try again.
         </div>
       )}
 
@@ -55,8 +74,8 @@ export default function CheckoutForm() {
             required
             id="name"
             className="form-control"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formData.name}
+            onChange={handleInputChange}
             placeholder="Your Name"
           />
         </div>
@@ -68,8 +87,8 @@ export default function CheckoutForm() {
             id="email"
             type="email"
             className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleInputChange}
             placeholder="you@example.com"
           />
         </div>
@@ -79,7 +98,7 @@ export default function CheckoutForm() {
           className="btn btn-primary w-100"
           disabled={status === "sending" || cart.length === 0}
         >
-          {status === "sending" ? "Sending..." : "Send Order"}
+          {status === "sending" ? "Processing..." : "Place Order"}
         </button>
       </form>
     </div>

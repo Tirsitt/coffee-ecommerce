@@ -10,6 +10,7 @@ export default function Shop() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(mockProducts);
   const [currentPage, setCurrentPage] = useState(1);
+  const [resetKey, setResetKey] = useState(0);
   const productsPerPage = 6;
 
   // Combine both search and filters
@@ -30,6 +31,12 @@ export default function Shop() {
   useEffect(() => {
     setCurrentPage(1);
   }, [filteredProducts, searchTerm]);
+
+  const resetFilters = () => {
+    setSearchTerm("");
+    setFilteredProducts(mockProducts);
+    setResetKey(prev => prev + 1);
+  };
 
   return (
     <div className="container mt-4">
@@ -55,7 +62,8 @@ export default function Shop() {
       <div className="row">
         {/* Filters Column */}
         <div className="col-md-3">
-          <ProductFilters 
+          <ProductFilters
+            key={resetKey} 
             products={mockProducts}
             onFilterChange={setFilteredProducts}
           />
@@ -82,20 +90,8 @@ export default function Shop() {
             </>
           ) : (
             <div className="text-center py-5">
-              <h4>No products found</h4>
-              <p className="text-muted">
-                {searchTerm ? 
-                  `No matches for "${searchTerm}"` : 
-                  "Try adjusting your filters"
-                }
-              </p>
-              <button 
-                className="btn btn-outline-primary"
-                onClick={() => {
-                  setSearchTerm("");
-                  setFilteredProducts(mockProducts);
-                }}
-              >
+              <h4>No matching products found</h4>
+              <button className="btn btn-outline-primary" onClick={resetFilters}>
                 <i className="fas fa-redo me-2"></i>Reset Filters
               </button>
             </div>
