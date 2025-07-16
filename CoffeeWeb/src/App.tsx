@@ -20,6 +20,7 @@ import AdminProducts from "./pages/admin/AdminProducts";
 import AdminOrders from "./pages/admin/AdminOrders";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UserProfile from "./pages/UserProfile";
 
 function MainLayout() {
   return (
@@ -58,6 +59,15 @@ function App() {
                     <Checkout />
                   </ProtectedRoute>
                 } 
+              />
+
+              <Route 
+                path="/Profile" 
+                element={
+                  <ProtectedRoute>
+                    <UserProfile />
+                  </ProtectedRoute>
+                }
               />
             </Route>
 

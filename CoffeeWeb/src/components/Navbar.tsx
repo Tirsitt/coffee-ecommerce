@@ -21,11 +21,11 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand fw-bold fs-4" to="/">
           Coffee Shop
         </Link>
         
-        <div className="d-flex align-items-center gap-3">
+        <div className="d-flex align-items-center gap-1">
           {/* Always show Shop link */}
           <Link to="/shop" className="btn btn-outline-light">
             Shop
@@ -43,9 +43,16 @@ export default function Navbar() {
 
           {/* Conditional auth buttons */}
           {user ? (
-            <button onClick={handleLogout} className="btn btn-primary">
-              Logout
-            </button>
+            <div className="d-flex align-items-center gap-1">
+              <Link to="/Profile" className="btn btn-outline-light">
+                <i className="bi bi-person me-1" />
+                Profile
+              </Link>
+              <button onClick={handleLogout} className="btn btn-danger">
+                <i className="bi bi-box-arrow-right me-1" />
+                Logout
+              </button>
+            </div>
           ) : (
             <>
               <Link to="/login" className="btn btn-outline-light">

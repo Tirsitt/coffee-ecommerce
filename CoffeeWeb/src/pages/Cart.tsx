@@ -2,13 +2,19 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import CartSummary from "../components/CartSummary";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 export default function Cart() {
   const cartContext = useContext(CartContext);
   const cart = cartContext?.cart || [];
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-4">
+      <Breadcrumbs paths={[
+        { name: "Home", link: "/" },
+        { name: "Cart" }
+      ]} />
+
       <h1 className="mb-4">Your Cart</h1>
 
       {cart.length === 0 ? (

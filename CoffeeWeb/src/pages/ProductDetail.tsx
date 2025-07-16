@@ -1,6 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { mockProducts } from "../data/mockProducts";
 import { useCart } from "../context/CartContext";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -13,8 +14,14 @@ export default function ProductDetail() {
 
   return (
     <div className="container mt-4">
+      <Breadcrumbs paths={[
+        { name: "Home", link: "/" },
+        { name: "Shop", link: "/Shop" },
+        { name: product.name }
+      ]} />
+                  
       {/* Back Navigation */}
-      <Link to="/" className="btn btn-outline-secondary mb-4">
+      <Link to="/Shop" className="btn btn-outline-secondary mb-4">
         ← Continue Shopping
       </Link>
 

@@ -7,6 +7,8 @@ export type UserRole = "user" | "admin";
 export type User = {
   email: string;
   name?: string;
+  phone?: string;
+  address?: string;
   role: UserRole;
   lastLogin?: Date;
 };
@@ -18,6 +20,7 @@ type AuthContextType = {
   login: (email: string, password: string, isAdmin?: boolean) => Promise<void>;
   logout: () => void;
   loading: boolean;
+  updateUser: (userData: Partial<User>) => Promise<void>; // Added for profile
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -81,6 +84,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const userData: User = { 
         email: foundUser.email, 
         name: foundUser.name, 
+        phone: foundUser.phone,
+        address: foundUser.address,
         role: foundUser.role as UserRole,
         lastLogin: new Date()
       };
@@ -105,6 +110,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     navigate(wasAdmin ? "/admin/login" : "/");
   }, [navigate, user]);
 
+  // Profile updates
+  const updateUser = async (userData: Partial<User>) => {
+    if (!user) throw new Error("Not authenticated");
+    setLoading(true);
+    try {
+      const updatedUser = { ...user, ...userData };
+      localStorage.setItem("user", JSON.stringify({
+        ...updatedUser,
+        timestamp: Date.now()
+      }));
+      setUser(updatedUser);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Auto-logout on inactivity
   useEffect(() => {
     const handleInactivity = () => {
@@ -126,7 +147,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isAdmin: user?.role === "admin",
     login,
     logout,
-    loading
+    loading,
+    updateUser // Add to context value
   };
 
   return (
