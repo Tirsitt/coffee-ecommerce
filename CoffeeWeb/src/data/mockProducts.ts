@@ -1,4 +1,3 @@
-// src/data/mockProducts.ts
 import type { Product } from "../types/Product";
 
 export const mockProducts: Product[] = [
@@ -9,7 +8,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "Rich chocolate notes with full body",
     stock: 50,
-    rating: 4.5,
     category: "coffee"
   },
   {
@@ -19,7 +17,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1459755486867-b55449bb39ff?w=300",
     description: "Bright floral notes with light body",
     stock: 30,
-    rating: 4.2,
     category: "coffee"
   },
   {
@@ -29,7 +26,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=300",
     description: "Classic robust tea blend",
     stock: 45,
-    rating: 4.0,
     category: "tea"
   },
   {
@@ -39,7 +35,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "Nutty flavor with smooth finish",
     stock: 40,
-    rating: 4.3,
     category: "coffee"
   },
   {
@@ -49,7 +44,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "Earthy tones with heavy body",
     stock: 25,
-    rating: 4.7,
     category: "coffee"
   },
   {
@@ -59,7 +53,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=300",
     description: "Fragrant floral green tea",
     stock: 60,
-    rating: 4.4,
     category: "tea"
   },
   {
@@ -69,7 +62,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "Bright acidity with berry notes",
     stock: 20,
-    rating: 4.8,
     category: "coffee"
   },
   {
@@ -79,7 +71,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=300",
     description: "Calming caffeine-free herbal infusion",
     stock: 55,
-    rating: 4.1,
     category: "tea"
   },
   {
@@ -89,7 +80,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "Complex flavor with smoky undertones",
     stock: 35,
-    rating: 4.6,
     category: "coffee"
   },
   {
@@ -99,7 +89,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=300",
     description: "Bergamot-infused black tea",
     stock: 50,
-    rating: 4.3,
     category: "tea"
   },
   {
@@ -109,7 +98,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "Bright acidity with honey sweetness",
     stock: 30,
-    rating: 4.5,
     category: "coffee"
   },
   {
@@ -119,7 +107,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=300",
     description: "Refreshing mint infusion",
     stock: 65,
-    rating: 4.0,
     category: "tea"
   },
   {
@@ -129,7 +116,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "Smooth with buttery mouthfeel",
     stock: 15,
-    rating: 4.9,
     category: "coffee"
   },
   {
@@ -139,7 +125,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=300",
     description: "Spiced Indian-style black tea",
     stock: 40,
-    rating: 4.2,
     category: "tea"
   },
   {
@@ -149,7 +134,6 @@ export const mockProducts: Product[] = [
     image: "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=300",
     description: "All the flavor without caffeine",
     stock: 35,
-    rating: 4.0,
     category: "coffee"
   }
 ];

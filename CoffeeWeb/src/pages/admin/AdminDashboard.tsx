@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { mockProducts } from '../../data/mockProducts';
 import { mockOrders } from '../../data/mockOrders';
+import { mockUsers } from '../../data/mockUsers';
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState([
@@ -13,7 +14,7 @@ export default function AdminDashboard() {
 
   // Fetch data on component mount
   useEffect(() => {
-    // In a real app, you would fetch from API here
+    // Fetch from API here
     const totalProducts = mockProducts.length;
     const pendingOrders = mockOrders.filter(order => order.status === 'pending').length;
     const thirtyDaysAgo = new Date();
@@ -27,7 +28,7 @@ export default function AdminDashboard() {
       { ...stats[0], value: totalProducts },
       { ...stats[1], value: pendingOrders },
       { ...stats[2], value: `$${recentRevenue.toFixed(2)}` },
-      { ...stats[3], value: mockOrders.length } // Using orders count as placeholder for users
+      { ...stats[3], value: mockUsers.length }
     ]);
   }, []);
 

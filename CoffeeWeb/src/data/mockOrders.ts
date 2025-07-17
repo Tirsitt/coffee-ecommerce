@@ -1,4 +1,3 @@
-// data/mockOrders.ts
 import type { AdminOrder } from '../types/Order';
 
 export const mockOrders: AdminOrder[] = [

@@ -4,6 +4,7 @@ import ProductFilters from "../../components/ProductFilters";
 import Pagination from "../../components/Pagination";
 import { mockProducts } from "../../data/mockProducts";
 import type { Product } from "../../types/Product";
+import { DeleteProduct } from "../../components/DeleteProduct";
 
 export default function AdminProducts() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,6 +13,24 @@ export default function AdminProducts() {
   const [resetKey, setResetKey] = useState(0);
   const productsPerPage = 10;
 
+  const [showDeleteProduct, setShowDeleteProduct] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<number | null>(null);
+
+  const handleDeleteProduct = async () => {
+    if (productToDelete === null) return;
+
+    try {
+      console.log('Deleting product:', productToDelete);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setFilteredProducts(prev => prev.filter(p => p.id !== productToDelete));
+      setShowDeleteProduct(false);
+      alert('Product deleted successfully');
+    } catch (error) {
+      console.error('Failed to delete product:', error);
+      alert('Failed to delete product');
+    }
+  };
+  
   const finalProducts = useMemo(() => {
     return filteredProducts.filter(product =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -98,8 +117,13 @@ export default function AdminProducts() {
                                     >
                                     <i className="bi bi-pencil"></i>
                                     </Link>
-                                    <button className="btn btn-sm btn-outline-danger">
-                                    <i className="bi bi-trash"></i>
+                                    <button className="btn btn-sm btn-outline-danger"
+                                      onClick={() => {
+                                        setProductToDelete(product.id);
+                                        setShowDeleteProduct(true);
+                                      }}
+                                    >
+                                      <i className="bi bi-trash"></i>
                                     </button>
                                 </div>
                             </td>
@@ -109,6 +133,15 @@ export default function AdminProducts() {
                   </table>
                 </div>
               </div>
+
+              <DeleteProduct
+                show={showDeleteProduct}
+                onClose={() => setShowDeleteProduct(false)}
+                onConfirm={() => {
+                  if (productToDelete) handleDeleteProduct();
+                  setShowDeleteProduct(false);
+                }}
+              />
 
               {/* Pagination */}
               <div className="mt-4">

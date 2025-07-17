@@ -3,7 +3,7 @@ import { mockOrders } from "../../data/mockOrders";
 import type { OrderStatus } from "../../types/Order";
 
 export default function AdminOrders() {
-  // In a real app, fetch orders from API
+  // Fetch orders from API
   const [orders, setOrders] = useState(mockOrders);
 
   const updateOrderStatus = (orderId: string, newStatus: OrderStatus) => {

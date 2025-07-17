@@ -48,10 +48,16 @@ export default function Navbar() {
                 <i className="bi bi-person me-1" />
                 Profile
               </Link>
-              <button onClick={handleLogout} className="btn btn-danger">
-                <i className="bi bi-box-arrow-right me-1" />
-                Logout
-              </button>
+              {user.role === "admin" ? (
+                <Link to="/admin/dashboard" className="btn btn-warning">
+                  Admin Panel
+                </Link>
+              ) : (
+                <button onClick={handleLogout} className="btn btn-danger">
+                  <i className="bi bi-box-arrow-right me-1" />
+                  Logout
+                </button>
+              )}
             </div>
           ) : (
             <>

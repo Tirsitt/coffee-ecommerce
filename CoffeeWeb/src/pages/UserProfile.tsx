@@ -4,7 +4,7 @@ import { Button, Card, Form, Alert, Spinner } from 'react-bootstrap';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function ProfilePage() {
-  const { user, updateUser, logout, loading: authLoading } = useAuth();
+  const { user, updateUser, loading: authLoading } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',

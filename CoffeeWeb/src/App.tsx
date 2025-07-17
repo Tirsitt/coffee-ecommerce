@@ -21,6 +21,9 @@ import AdminOrders from "./pages/admin/AdminOrders";
 import AdminLoginPage from "./pages/admin/AdminLoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserProfile from "./pages/UserProfile";
+import AddProduct from "./components/AddProduct";
+import EditProduct from "./components/EditProduct";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 function MainLayout() {
   return (
@@ -88,6 +91,9 @@ function App() {
               <Route path="products" element={<AdminProducts />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="logout" element={<Logout />} />
+              <Route path="products/new" element={<AddProduct />} />
+              <Route path="products/edit/:id" element={<EditProduct />} />
+              <Route path="users" element={<AdminUsers />} />
             </Route>
 
             {/* 404 - with layout */}
